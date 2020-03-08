@@ -1,0 +1,182 @@
+{% extends "common/base.html" %}
+{% block title %}
+            <title>Agile&nbsp;Cat&nbsp;post</title>
+        {% endblock %}
+{% block content %}
+          <!-- Navbar Menu -->
+          <div id="navbarcollapse" class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><a href="{{ url_for('blog.index') }}" class="nav-link ">Home</a>
+              </li>
+              <li class="nav-item"><a href="{{ url_for('blog.b_blog') }}" class="nav-link ">Blog</a>
+              </li>
+              <li class="nav-item"><a href="{{ url_for('blog.post') }}" class="nav-link active ">Post</a>
+              </li>
+                <li style="position: absolute; left: 1350px; top: 34px" class="nav-item"><a href="{{ url_for('blog.logout') }}" class="nav-link ">{{ username }}&nbsp;退出登录</a>
+              </li>
+            </ul>
+            <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="row">
+        <!-- Latest Posts -->
+        <main class="post blog-post col-lg-8"> 
+          <div class="container">
+            <div class="post-single">
+              <div class="post-thumbnail"><img src="{{ url_for('static',filename=articles[0].picture)}}" alt="..." class="img-fluid"></div>
+              <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                  <div class="category">
+                      <a href="{{ url_for('blog.b_blog',cid=articles[1].cid) }}">{{ articles[1].name }}</a>
+                  </div>
+                </div>
+                <h1>{{ articles[0].title }}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
+                    <div class="avatar"><img src="{{ url_for('static',filename='img/Blogger.JPG')}}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>粥粥</span></div></a>
+                  <div class="d-flex align-items-center flex-wrap">       
+                    <div class="date"><i class="icon-clock"></i>{{ articles[0].create_time }}</div>
+                    <div class="views"><i class="icon-eye"></i>{{ articles[0].hits }}</div>
+                    <div class="comments meta-last"><i class="icon-comment"></i>{{ articles[0].comments }}</div>
+                  </div>
+                </div>
+                <div class="post-tags">
+                    {% for value in tag %}
+                        <a href="#" class="tag">#{{ value[0] }}</a>
+                    {% endfor %}
+                </div>
+                <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
+                    <a href="{{ url_for('blog.post',aid=aid_min[-1][0]) }}" class="prev-post text-left d-flex align-items-center">
+                    <div class="icon prev"><i class="fa fa-angle-left"></i></div>
+                    <div class="text"><strong class="text-primary">上一篇</strong>
+                    </div></a>
+
+                    <a href="{{ url_for('blog.post',aid=aid_max[0][0]) }}" class="next-post text-right d-flex align-items-center justify-content-end">
+                    <div class="text"><strong class="text-primary">下一篇</strong>
+                    </div>
+                    <div class="icon next"><i class="fa fa-angle-right">   </i></div></a>
+
+
+                </div>
+                <div class="post-comments">
+                  <header>
+                    <h3 class="h6">发表评论<span class="no-of-comments">(3)</span></h3>
+                  </header>
+                  <div class="comment">
+                    <div class="comment-header d-flex justify-content-between">
+                      <div class="user d-flex align-items-center">
+                        <div class="image"><img src="{{ url_for('static',filename='img/V1.JPG')}}" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="title"><strong>Jabi Hernandiz</strong><span class="date">March 2020</span></div>
+                      </div>
+                    </div>
+                    <div class="comment-body">
+                      <p>好想到年龄自己养一只小猫。</p>
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <div class="comment-header d-flex justify-content-between">
+                      <div class="user d-flex align-items-center">
+                        <div class="image"><img src="{{ url_for('static',filename='img/V2.JPG')}}" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="title"><strong>Nikolas</strong><span class="date">March 2020</span></div>
+                      </div>
+                    </div>
+                    <div class="comment-body">
+                      <p>刚好楼下有只小野猫，收养一下。</p>
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <div class="comment-header d-flex justify-content-between">
+                      <div class="user d-flex align-items-center">
+                        <div class="image"><img src="{{ url_for('static',filename='img/V3.JPG')}}" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="title"><strong>John Doe</strong><span class="date">March 2020</span></div>
+                      </div>
+                    </div>
+                    <div class="comment-body">
+                      <p>猫真的这么可爱吗？</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="add-comment">
+                  <header>
+                    <h3 class="h6">留下一个回复</h3>
+                  </header>
+                  <form action="#" class="commenting-form">
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <input type="text" name="username" id="username" placeholder="用户名" class="form-control">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <input type="email" name="username" id="useremail" placeholder="电子邮箱地址（将不会公布）" class="form-control">
+                      </div>
+                      <div class="form-group col-md-12">
+                        <textarea name="usercomment" id="usercomment" placeholder="输入你的评论" class="form-control"></textarea>
+                      </div>
+                      <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-secondary">提交</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <aside class="col-lg-4">
+          <!-- Widget [Search Bar Widget]-->
+          <div class="widget search">
+            <header>
+              <h3 class="h6">Search the blog</h3>
+            </header>
+            <form action="#" class="search-form">
+              <div class="form-group">
+                <input type="search" placeholder="What are you looking for?">
+                <button type="submit" class="submit"><i class="icon-search"></i></button>
+              </div>
+            </form>
+          </div>
+          <!-- Widget [Latest Posts Widget]        -->
+          <div class="widget latest-posts">
+            <header>
+              <h3 class="h6">Latest Posts</h3>
+            </header>
+            <div class="blog-posts">
+                {% for value in arti_l %}
+                    <a href="{{ url_for('blog.post',aid=value.aid) }}"><div class="item d-flex align-items-center">
+                      <div class="image"><img src="{{ url_for('static',filename=value.picture)}}" alt="..." class="img-fluid"></div>
+                      <div class="title"><strong>{{value.title}}</strong>
+                        <div class="d-flex align-items-center">
+                          <div class="views"><i class="icon-eye"></i>{{ value.hits }}</div>
+                          <div class="comments"><i class="icon-comment"></i>{{ value.comments }}</div>
+                        </div>
+                      </div>
+                    </div></a>
+                {% endfor %}
+            </div>
+          </div>
+          <!-- Widget [Categories Widget]-->
+          <div class="widget categories">
+            <header>
+              <h3 class="h6">Categories</h3>
+            </header>
+              {% for value in arti_c %}
+                <div class="item d-flex justify-content-between"><a href="{{ url_for('blog.b_blog',cid=value.cid) }}">{{ value.name }}</a><span>{{value.num}}</span></div>
+              {% endfor %}
+          </div>
+          <!-- Widget [Tags Cloud Widget]-->
+          <div class="widget tags">
+            <header>
+              <h3 class="h6">Tags</h3>
+            </header>
+            <ul class="list-inline">
+                {% for value in arti_t %}
+                    <li class="list-inline-item"><a href="#" class="tag">#{{value[0]}}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+{% endblock %}

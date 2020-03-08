@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0077)https://user.news.cn/user/reg?servicecode=xhbk&gourl=http://blog.home.news.cn -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link href="/static/img/fw_favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <title>Agile&nbsp;Cat&nbsp;Register</title>
+<meta http-equiv="X-UA-Compatible" content="edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/pbase.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/pcommon.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/puser_reg.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/validate.css')}}">
+<style type="text/css">
+  .error-hint {
+	    height: 30px;
+	    border: 1px #dddddd solid;
+   }
+   .identity-info{
+   		font-size: 14px;
+   }
+	.show{display:block;}
+	.hide{display:none;}
+	.fl{float:left;}
+	.fr{float:right;}
+	.clear{clear:both; height:0; font-size:0;overflow:hidden;}
+	#topHeader {
+	    height: 32px;
+	    text-align: center;
+	    border-bottom: 1px solid #c9c9ca;
+	    background: #f9f7f4;
+	}
+	#topHeader .top {
+	    width: 1000px;
+	    margin: 0 auto;
+	    height: inherit;
+	    padding: 0;
+	    border: 0;
+	    outline: none;
+	    list-style: none;
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	#topHeader a {
+	    float: left;
+	    height: 32px;
+	    line-height: 32px;
+	    color: #000;
+	    margin: 0 10px;
+	    font-size: 12px;
+	    cursor: pointer;
+	    outline: none;
+	    text-decoration: none;
+	    padding: 0;
+	    font-weight: normal;
+	    font-style: normal;
+	    font-family: "宋体";
+	}
+	.widthMain {
+	    margin: 0 auto;
+	    width: 1000px;
+	    padding: 10px;
+	}
+	.xhw-logo-font {
+        font-size: 40px;
+        line-height: 85px;
+        color: indianred;
+        margin: 14px 0 0 40px;
+        font-weight: bold;
+    }
+	.login-info{
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+	}
+	.login-info p{
+		font-size: 14px;
+	}
+	.xhw-bulefont{
+		color: #0272b4;
+	}
+    .footer {
+            font-size: 14px;
+            font-family: "宋体";
+            color: #000000;
+            line-height: 22px;
+            text-align: center;
+        }
+    .place{
+        position: relative;
+    }
+    .place_span{
+         color: red;
+        position: absolute;
+        left: 180px;
+        top: 6px;
+        font-family: 新宋体;
+    }
+    .place_span_sms{
+        color: red;
+        position: absolute;
+        left: 155px;
+        top: 6px;
+        font-family: 新宋体;
+    }
+    .place_span_password{
+        color: red;
+        position: absolute;
+        left: 240px;
+        bottom: 50px;
+        font-family: 新宋体;
+    }
+    </style>
+</head>
+<!--头部-->
+<div class="main">
+    <!--头部-->
+    <div class="widthMain" style="border-bottom: 1px solid indianred; position: relative;">
+        <a class="fl" href="" target="_blank"><img alt="logo" src="{{ url_for('static',filename='img/LOGOF.png') }}"></a>
+        <p class="fl xhw-logo-font">Agile&nbsp;Cat</p>
+    <div class="login-info">
+		<p class="hide" id="isreg_show" style="display: block;">已有账号，<span class="xhw-bulefont pointer goto_xhwlogin">请登录</span></p>
+		<p class="hide" id="notlogin_show" style="display: none;"><span class="xhw-bulefont pointer goto_xhwlogin">登录</span><span class="xhw-bulefont">&nbsp;|&nbsp;</span><span class="xhw-bulefont pointer" id="goto_xhwreg">注册</span></p>
+		<p class="hide" id="login_show" style="display: none;">您好，<span class="xhw-bulefont" id="xhwlogin_name"></span></p>
+	</div>
+	<div class="clear"></div>
+</div>
+<script type="text/javascript" src="{{ url_for('static',filename='img/jquery.min.js')}}"></script>
+<!--end-->
+
+    <!--主体正文开始-->
+  	<div class="content">
+  		<div class="padd">
+			<!--面包屑结束-->
+			<div class="greenColumn column_pub_border">
+				<div class="auto">
+		            <div id="tab_setup_1" class="rectangle rectangle-3 active">
+		                1 创建账号
+		                <div class="triangle"></div>
+		            </div>
+		            <div id="tab_setup_2" class="rectangle rectangle-3 right-move">
+		                <div class="triangle-cave"></div>
+		                2 完成
+		            </div>
+        		</div>
+
+				<div class="auto mt80 setup1 " id="setup1">
+					<form class="cmxform" id="commentForm" novalidate="novalidate" action="{{ url_for('blog.register_user') }}" method="post">
+                        {{  form.csrf_token  }}
+						<div class="hide mt8 error-hint" id="step1-error">
+							<img class="ml5 mt5 mr5 fl" id="error_icon" src="{{ url_for('static',filename='img/error_icon.png')}}">
+							<img class="hide ml5 mt5 mr5 fl hide" id="right_icon" src="{{ url_for('static',filename='img/right_icon.png')}}">
+							<span class="fl" style="margin-top:4px;" id="step1-error-msg"></span>
+				        </div>
+						<div id="regbyphone">
+							<p class="mt30 title-font" id="setp1title"><font class="red-star">*</font>请输入手机号</p>
+							<div class="mt20 import-div pub-bottom-border place">
+								<input type="text" class="{trim:true,require:true,mobilePhone:true} num" name="phone" id="phone" maxlength="11" placeholder="请输入您的手机号码" autocomplete="off">
+								{% for error in form.phone.errors %}
+                                    <span class="place_span">{{ error }}</span>
+                                {% endfor %}
+                                <label class="error" for="phonenum" id="phonenumerr"></label>
+							</div>
+							<div class="mt15 import-div pub-bottom-border place" style="height:35px;">
+								<input style="width:250px;margin-top:12px;" type="text" id="piccode" class="{trim:true,require:true,piccode:true} num" name="code" maxlength="4" placeholder="请输入图片验证码" autocomplete="off">
+                                {% for error in form.code.errors %}
+                                    <span class="place_span">{{ error }}</span>
+                                {% endfor %}
+                                <label class="error" for="piccode" id="piccodeerr" style="top:15px;"></label>
+								<img alt="验证码" class="fr" id="piccodeimg" style="cursor:pointer;width: 100px;height: 34px;" src="{{ url_for('blog.verify_code') }}" alt="" onclick="this.src={{ url_for('blog.verify_code') }}+'?'+Math.random()">
+							</div>
+							<div class="fl mt10 import-div pub-bottom-border place" style="width:255px;height:35px;">
+								<input class="fl {trim:true,require:true,phonecode:true} num" style="width:230px;margin-top:12px;" type="text" name="sms" id="phonecode" maxlength="5" placeholder="请输入4位验证码" autocomplete="off">
+								{% for error in form.sms.errors %}
+                                    <span class="place_span_sms">{{ error }}</span>
+                                {% endfor %}
+                                <label class="error" style="right:-450px;top:15px;" for="phonecode" id="phonecodeerr"></label>
+							</div>
+							<input class="fr mt10 code-button" type="button" id="send" value="获取短信验证码">
+							<div class="clear"></div>
+							<div class="fl mt5 ml5 hide" id="sendcodesuc"><img class="fl" alt="验证码发送成功" src="{{ url_for('static',filename='img/right_icon.png')}}"><span class="fl ml5 codesuc-font">验证码已发送至您的手机，请查收</span></div>
+						</div>
+						<p class="mt50 title-font"><font class="red-star">*</font>请设置密码</p>
+						<div class="mt15 import-div pub-bottom-border place">
+							<input class="import-input {pwd:[&#39;/user/checkpwd&#39;]}" id="password" maxlength="20" name="password" type="password" placeholder="8-20位字符，必须由数字、字母或符号两种以上组成" autocomplete="off">
+							{% for error in form.password.errors %}
+                                <span class="place_span_password">{{ error }}</span>
+                            {% endfor %}
+                            <label id="pwdlabel" class="error" style="z-index:999;" for="password"></label><span class="pwdpassmsg"></span>
+						</div>
+						<div class="mt20 import-div pub-bottom-border place">
+							<input class="import-input {required:true,equalTo:&#39;#password&#39;}" id="pwdagain" name="confirm"
+                                   maxlength="20" type="password" placeholder="请再次输入密码" autocomplete="off">
+                            {% for error in form.confirm.errors %}
+                                <span class="place_span">{{ error }}</span>
+                            {% endfor %}
+						</div>
+
+                        <p class="mt30 title-font" id="setp1title">&nbsp;&nbsp;请输入昵称</p>
+						<div class="mt20 import-div pub-bottom-border place">
+							<input type="text" class="{trim:true,nickname:true}" name="username" id="nickname" maxlength="18" placeholder="请输入昵称">
+						    {% for error in form.username.errors %}
+                                <span class="place_span">{{ error }}</span>
+                            {% endfor %}
+                            <label class="error" for="nickname" id="nicknameerror"></label>
+						</div>
+						<div class="fl mt10 ml10 agreementcheck"><img id="isagree" src="{{ url_for('static',filename='img/zhuce1.png')}}"></div>
+						<p class="fl mt8 ml10 agreement-font"><font class="red-star">*</font>我已阅读并同意 <span class="register-agree-font">《 注册协议 》</span></p>
+						<input class="mt60 blue-button400 themebgc submit" style="height:35px;line-height:35px;" type="submit" value="注册">
+					</form>
+					<div class="mt20"></div>
+				</div>
+
+				<div class="auto mt120 setup3 hide" id="setup3">
+					<img src="/static/img/success_icon.png" alt="成功">
+					<p class="mt20 authentication-font usercenter" style="display: none;">注册成功，您可以进入 <span id="reglogin">个人中心</span>。</p>
+					<p class="mt20 authentication-font carryon hide" style="display: block;">注册成功，您可以 <span id="back">继续操作</span>。</p>
+					<p class="mt20 carryon hide" style="font-size: 14px; display: block;" 微软雅黑",arial;"="">本页面将在<span id="close">5</span>秒后自动跳转</p>
+					<div class="mt80"></div>
+        		</div>
+
+				<!-- 找回手机号继续注册流程结束 -->
+				<div class="clear"></div>
+			</div>
+		<div class="clear"></div>
+	 </div>
+	</div>
+    <div class="footer">
+        <p>Copyright © 2020 - 2020 XINHUANET.com　All Rights Reserved.</p>
+        <p>制作单位：Agile&nbsp;Cat有限公司　　版权所有 Agile&nbsp;Cat有限公司</p>
+    </div>
+</div>
+<script type="text/javascript" src="{{ url_for('static',filename='img/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='img/jsencrypt.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='img/pmExtJquery.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='img/jquery.validate.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='img/jquery.metadata.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='img/messages_cn.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='img/additional-methods.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='img/pbase.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='img/placeholderfriend.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='img/dialogpage.js')}}"></script>
+
+
+</body></html>
+<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script>
+     $("#send").click(function () {
+        num = 5;
+        $(this).attr('disabled',true);
+        $(this).prop('value',""+num+"秒后发送");
+        let _this = this;  //this表示当前按钮
+        var timer = setInterval(function () {
+            num -= 1;
+            if (num <0){
+                $(_this).attr('disabled',false);
+                $(this).prop('value',"发送验证码")
+                return
+            }
+            $(_this).prop('value',""+num+"秒后发送");
+            console.log(num)
+        },1000);
+        let phone = $("#phone").val();
+        let csrf = $("[name='csrf_token']").val();
+        // 发送短信验证码
+        //ajax
+        $.post("/send/",{'phone':phone,'csrf_token':csrf},function (data) {
+            console.log(data)
+        })
+    })
+</script>
+<script type='text/javascript' color='102,185,255' zIndex='-10' opacity='50' count='99' src='http://dl.lancdn.com/landian/dev/h5/canvas/canvas-nest.min.js'></script>

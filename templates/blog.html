@@ -1,0 +1,136 @@
+{% extends "common/base.html" %}
+{% block title %}
+            <title>Agile&nbsp;Cat&nbsp;blog</title>
+        {% endblock %}
+{% block content %}
+          <!-- Navbar Menu -->
+          <div id="navbarcollapse" class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><a href="{{ url_for('blog.index') }}" class="nav-link ">Home</a>
+              </li>
+              <li class="nav-item"><a href="{{ url_for('blog.b_blog') }}" class="nav-link active ">Blog</a>
+              </li>
+              <li class="nav-item"><a href="{{ url_for('blog.post') }}" class="nav-link ">Post</a>
+              </li>
+                <li style="position: absolute; left: 1350px; top: 34px" class="nav-item"><a href="{{ url_for('blog.logout') }}" class="nav-link ">{{ username }}&nbsp;退出登录</a>
+              </li>
+            </ul>
+            <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="row">
+        <!-- Latest Posts -->
+        <main class="posts-listing col-lg-8"> 
+          <div class="container">
+            <div class="row">
+                {% for value in pagination.items %}
+                <!-- post -->
+                  <div class="post col-xl-6">
+                    <div class="post-thumbnail"><a href="{{ url_for('blog.post',aid=value[0].aid) }}"><img src="{{ url_for('static',filename=value[0].picture)}}" alt="..." class="img-fluid"></a></div>
+                    <div class="post-details">
+                      <div class="post-meta d-flex justify-content-between">
+                        <div class="date meta-last">{{ value[0].create_time }}</div>
+                        <div class="category"><a href="{{ url_for('blog.b_blog',cid=value[1].cid) }}">{{ value[1].name }}</a></div>
+                      </div><a href="{{ url_for('blog.post',aid=value[0].aid) }}">
+                        <h3 class="h4">{{ value[0].title }}</h3></a>
+                      <p class="text-muted">{{ value[0].content }}</p>
+                      <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                          <div class="avatar"><img src="{{ url_for('static',filename='img/Blogger.JPG')}}" alt="..." class="img-fluid"></div>
+                          <div class="title"><span>粥粥</span></div></a>
+                        <div class="date"><i class="icon-clock"></i>{{ value[0].create_time }}</div>
+                        <div class="comments meta-last"><i class="icon-comment"></i>{{ value[0].comments }}</div>
+                      </footer>
+                    </div>
+                  </div>
+                {% endfor %}
+            </div>
+            <!-- Pagination -->
+
+          <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-template d-flex justify-content-center">
+                  {% if pagination.page == 1 %}
+                    <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true"></span></a></li>
+                  {% else %}
+                      <li class="page-item"><a class="page-link" href="{{ url_for('blog.b_blog',cid=cid2,page=pagination.prev_num) }}" aria-label="Previous"><span aria-hidden="true"></span><i class="fa fa-angle-left"></i></a></li>
+                  {% endif %}
+                {#  页码范围    #}
+                  {% for current in pagination.page_range %}
+                      {% if current == pagination.page %}
+                        <li class="page-item active"><a class="page-link active" href="{{ url_for('blog.b_blog',cid=cid2,page=current) }}">{{ current }} <span class="sr-only">(current)</span></a></li>
+                      {% else %}
+                          <li class="page-item"><a class="page-link" href="{{ url_for('blog.b_blog',cid=cid2,page=current) }}">{{ current }}</a></li>
+                      {% endif %}
+                  {% endfor %}
+
+                {% if pagination.page == pagination.pages %}
+                    <li class="page-item disabled"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true"></span></a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="{{ url_for('blog.b_blog',cid=cid2,page=pagination.next_num) }}" aria-label="Next"><span aria-hidden="true"></span><i class="fa fa-angle-right"></i></a></li>
+
+              {% endif %}
+              </ul>
+           </nav>
+
+
+
+          </div>
+        </main>
+        <aside class="col-lg-4">
+          <!-- Widget [Search Bar Widget]-->
+          <div class="widget search">
+            <header>
+              <h3 class="h6">Search the blog</h3>
+            </header>
+            <form action="#" class="search-form">
+              <div class="form-group">
+                <input type="search" placeholder="What are you looking for?">
+                <button type="submit" class="submit"><i class="icon-search"></i></button>
+              </div>
+            </form>
+          </div>
+          <!-- Widget [Latest Posts Widget]        -->
+          <div class="widget latest-posts">
+            <header>
+              <h3 class="h6">Latest Posts</h3>
+            </header>
+            <div class="blog-posts">
+                {% for value in arti_l %}
+                    <a href="{{ url_for('blog.post',aid=value.aid) }}"><div class="item d-flex align-items-center">
+                      <div class="image"><img src="{{ url_for('static',filename=value.picture)}}" alt="..." class="img-fluid"></div>
+                      <div class="title"><strong>{{value.title}}</strong>
+                        <div class="d-flex align-items-center">
+                          <div class="views"><i class="icon-eye"></i>{{ value.hits }}</div>
+                          <div class="comments"><i class="icon-comment"></i>{{ value.comments }}</div>
+                        </div>
+                      </div>
+                    </div></a>
+                {% endfor %}
+            </div>
+          </div>
+          <!-- Widget [Categories Widget]-->
+          <div class="widget categories">
+            <header>
+              <h3 class="h6">Categories</h3>
+            </header>
+              {% for value in arti_c %}
+                <div class="item d-flex justify-content-between"><a href="{{ url_for('blog.b_blog',cid=value.cid) }}">{{ value.name }}</a><span>{{value.num}}</span></div>
+              {% endfor %}
+          </div>
+          <!-- Widget [Tags Cloud Widget]-->
+          <div class="widget tags">
+            <header>
+              <h3 class="h6">Tags</h3>
+            </header>
+            <ul class="list-inline">
+                {% for value in arti_t %}
+                    <li class="list-inline-item"><a href="#" class="tag">#{{value[0]}}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+{% endblock %}
