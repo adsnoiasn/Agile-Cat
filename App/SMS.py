@@ -1,8 +1,8 @@
 from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.request import CommonRequest
 
-ACCESS_KEY_ID = "LTAIDHOYSjYcvyVt"  #用户AccessKey  需要根据自己的账户修改
-ACCESS_KEY_SECRET = "qrEgykmXX4e6GUMFOqzuiLZ5gsUxSC"  #Access Key Secret  需要根据自己的账户修改
+ACCESS_KEY_ID = "XXX"  #用户AccessKey  需要根据自己的账户修改
+ACCESS_KEY_SECRET = "XXX"  #Access Key Secret  需要根据自己的账户修改
 
 class SMS:
     def __init__(self,signName,templateCode):
@@ -27,4 +27,4 @@ class SMS:
         response = self.client.do_action_with_exception(request)
         return response
 # 短语发送对象
-sms = SMS("成少雷","SMS_102315005")
+sms = SMS("XXX","XXX")
